@@ -1,28 +1,39 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.12.35514.174 d17.12
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Compactare-Vector", "Compactare-Vector\Compactare-Vector.vcxproj", "{D15652BE-C06C-4DE7-ABEB-FAF521519301}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
-		Release|x64 = Release|x64
-		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D15652BE-C06C-4DE7-ABEB-FAF521519301}.Debug|x64.ActiveCfg = Debug|x64
-		{D15652BE-C06C-4DE7-ABEB-FAF521519301}.Debug|x64.Build.0 = Debug|x64
-		{D15652BE-C06C-4DE7-ABEB-FAF521519301}.Debug|x86.ActiveCfg = Debug|Win32
-		{D15652BE-C06C-4DE7-ABEB-FAF521519301}.Debug|x86.Build.0 = Debug|Win32
-		{D15652BE-C06C-4DE7-ABEB-FAF521519301}.Release|x64.ActiveCfg = Release|x64
-		{D15652BE-C06C-4DE7-ABEB-FAF521519301}.Release|x64.Build.0 = Release|x64
-		{D15652BE-C06C-4DE7-ABEB-FAF521519301}.Release|x86.ActiveCfg = Release|Win32
-		{D15652BE-C06C-4DE7-ABEB-FAF521519301}.Release|x86.Build.0 = Release|Win32
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-EndGlobal
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+void compactare(int v[], int* n) {
+    int i, j, k;
+
+    // Parcurgem vectorul
+    for (i = 0; i < *n - 1; i++) {
+        for (j = i + 1; j < *n; ) {
+            if (v[i] == v[j]) {
+                // Dacă există un duplicat, eliminăm elementul
+                for (k = j; k < *n - 1; k++) {
+                    v[k] = v[k + 1];
+                }
+                (*n)--; // Reducem dimensiunea vectorului
+            }
+            else {
+                j++; // Doar trecem la următorul element dacă nu eliminăm
+            }
+        }
+    }
+}
+int main()
+{
+    int a[125],m;
+    printf("Introduceti elementele vectorului: ");
+    scanf("%d",&m);
+    for (int i = 0;i < m;i++)
+    {
+        printf("a[%d]=", i);
+        scanf("%d", &a[i]);
+    }
+    compactare(a, &m);
+    printf("Vector compactat:\n");
+    for (int i = 0;i < m;i++)
+        printf("%d ", a[i]);
+    
+}
+
